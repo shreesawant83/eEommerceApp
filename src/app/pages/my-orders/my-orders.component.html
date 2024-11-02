@@ -1,0 +1,64 @@
+<div class="row p-4">
+
+    @if(allOrdersData.length >0){
+
+    @for(orderData of allOrdersData; track $index){
+    <div class="col-3 border p-4">
+        <div class="">
+            Test Order
+        </div>
+        <div class="">
+            Order On - {{orderData.saleDate}}
+        </div>
+        <div class="">
+            Order Amount - {{orderData.totalInvoiceAmount}}
+        </div>
+        <button (click)="viewOrder(orderData.saleId)" class="btn btn-primary btn-sm">View order</button>
+    </div>
+    }
+    }@else {
+    <div class="container">
+        No Orders found
+    </div>
+    }
+</div>
+
+<!-- The Register Modal -->
+<div class="modal" id="myModal" #viewOrderModal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">View Order</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    (click)="closeViewOrderModal()"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                @for(viewOrder of viewOrderData; track $index){
+                    <div class="col-6 p-6 m-6">
+                        <div class="card">
+                            <img class="card-img-top" [src]="viewOrder.productImageUrl" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{viewOrder.productName}}</h5>
+                                <p class="card-text">Product Category - {{viewOrder.categoryName}}</p>
+                                <p class="card-text">Product Amount - {{viewOrder.productPrice}}</p>
+                                <p class="card-text">Product Quantity - {{viewOrder.quantity}}</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="closeViewOrderModal()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
